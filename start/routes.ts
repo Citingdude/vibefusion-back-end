@@ -19,5 +19,27 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+import Database from '@ioc:Adonis/Lucid/Database'
 
-Route.get('/', 'HomeController.index')
+Route.where('slug', /^[a-z0-9_-]+$/)
+
+// API group
+Route.group(() => {
+  // V1 group
+  Route.group(() => {
+    Route.get('/', 'HomeController.index')
+
+    // Cases group
+    Route.group(() => {
+      Route.get('/', 'CasesController.index')
+      Route.get('/:slug', 'CasesController.view')
+      Route.post('/', 'CasesController.create')
+    }).prefix('cases')
+
+    // Blog group
+    Route.group(() => {
+      Route.get('/', 'BlogController.index')
+      Route.get('/:slug', 'BlogController.view')
+    }).prefix('blog')
+  }).prefix('/v1')
+}).prefix('/api')
