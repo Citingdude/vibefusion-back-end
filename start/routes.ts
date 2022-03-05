@@ -27,7 +27,11 @@ Route.where('slug', /^[a-z0-9_-]+$/)
 Route.group(() => {
   // V1 group
   Route.group(() => {
-    Route.get('/', 'HomeController.index')
+    // Pages
+    Route.group(() => {
+      Route.get('/', 'HomeController.index')
+      Route.post('/', 'HomeController.create')
+    }).prefix('pages')
 
     // Cases group
     Route.group(() => {
