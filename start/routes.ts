@@ -34,6 +34,7 @@ Route.group(() => {
       Route.get('/', 'CasesController.index')
       Route.get('/:slug', 'CasesController.view')
       Route.post('/', 'CasesController.create')
+      Route.patch('/:slug', 'CasesController.update')
     }).prefix('cases')
 
     // Blog group
