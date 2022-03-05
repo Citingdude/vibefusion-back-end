@@ -6,6 +6,7 @@ export default class Cases extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
+      table.text('slug')
       table.text('title')
       table.text('description')
       table.timestamp('created_at', { useTz: true })
