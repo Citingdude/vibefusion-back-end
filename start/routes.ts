@@ -20,6 +20,7 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 import Database from '@ioc:Adonis/Lucid/Database'
+import PageController from 'App/Controllers/PageController'
 
 Route.where('slug', /^[a-z0-9_-]+$/)
 
@@ -29,8 +30,11 @@ Route.group(() => {
   Route.group(() => {
     // Pages
     Route.group(() => {
-      Route.get('/', 'HomeController.index')
-      Route.post('/', 'HomeController.create')
+      Route.get('/', 'PageController.index')
+      Route.post('/', 'PageController.create')
+      Route.get('/:slug', 'PageController.view')
+      Route.patch('/:slug', 'PageController.update')
+      Route.delete('/:slug', 'PageController.destroy')
     }).prefix('pages')
 
     // Cases group
