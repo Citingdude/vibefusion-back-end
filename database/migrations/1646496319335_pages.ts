@@ -6,7 +6,7 @@ export default class Pages extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.text('slug')
+      table.text('slug').unique()
       table.text('title')
       table.json('data')
       table.timestamp('created_at', { useTz: true })
