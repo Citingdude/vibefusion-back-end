@@ -50,5 +50,9 @@ Route.group(() => {
       Route.get('/', 'BlogController.index')
       Route.get('/:slug', 'BlogController.view')
     }).prefix('blog')
+
+    // Users
+    Route.get('/users', 'UserController.index')
+    Route.post('/users', 'UserController.create')
   }).prefix('/v1')
 }).prefix('/api')
