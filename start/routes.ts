@@ -54,5 +54,19 @@ Route.group(() => {
     // Users
     Route.get('/users', 'UserController.index')
     Route.post('/users', 'UserController.create')
+
+    // Auth
+    Route.post('/login', async ({ auth, request, response }) => {
+      const email = 'glenn.reumers@hotmail.com'
+      const password = 'password'
+
+      try {
+        const token = await auth.use('api').attempt(email, password)
+        return token
+      } catch {
+        return response.badRequest('Invalid credentials')
+      }
+
+    })
   }).prefix('/v1')
 }).prefix('/api')
