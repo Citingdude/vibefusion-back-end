@@ -19,8 +19,6 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
-import Database from '@ioc:Adonis/Lucid/Database'
-import PageController from 'App/Controllers/PageController'
 
 Route.where('slug', /^[a-z0-9_-]+$/)
 
