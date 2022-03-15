@@ -54,7 +54,7 @@ Route.group(() => {
     Route.post('/users', 'UserController.create')
 
     // Auth
-    Route.post('/login', async ({ auth, request, response }) => {
+    Route.post('/login', async ({ auth, response }) => {
       const email = 'glenn.reumers@hotmail.com'
       const password = 'password'
 
@@ -65,6 +65,16 @@ Route.group(() => {
         return response.badRequest('Invalid credentials')
       }
 
+    })
+
+    Route.get('/auth', async ({ auth }) => {
+      await auth.use('api').authenticate()
+
+      const data = {
+        status: true
+      }
+
+      return data
     })
   }).prefix('/v1')
 }).prefix('/api')
