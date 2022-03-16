@@ -54,9 +54,11 @@ Route.group(() => {
     Route.post('/users', 'UserController.create')
 
     // Auth
-    Route.post('/login', async ({ auth, response }) => {
-      const email = 'glenn.reumers@hotmail.com'
-      const password = 'password'
+    Route.post('/login', async ({ auth, request, response }) => {
+      const requestBody = request.body()
+
+      const email = requestBody.email
+      const password = requestBody.password
 
       try {
         const token = await auth.use('api').attempt(email, password)
