@@ -61,7 +61,9 @@ Route.group(() => {
       const password = requestBody.password
 
       try {
-        const token = await auth.use('api').attempt(email, password)
+        const token = await auth.use('api').attempt(email, password, {
+          expiresIn: '1mins'
+        })
         return token
       } catch {
         return response.badRequest('Invalid credentials')
