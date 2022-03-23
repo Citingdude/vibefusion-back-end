@@ -62,7 +62,7 @@ Route.group(() => {
 
       try {
         const token = await auth.use('api').attempt(email, password, {
-          expiresIn: '1mins'
+          expiresIn: '60mins'
         })
         return token
       } catch {
