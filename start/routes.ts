@@ -68,17 +68,22 @@ Route.group(() => {
       } catch {
         return response.badRequest('Invalid credentials')
       }
-
     })
 
     Route.get('/auth', async ({ auth }) => {
       await auth.use('api').authenticate()
+      
+      const isAuthenticated = auth.use('api').isAuthenticated
 
-      const data = {
-        status: true
+      return isAuthenticated
+    })
+
+    Route.post('/logout', async ({ auth, response }) => {
+      await auth.use('api').revoke()
+
+      return {
+        revoked: true
       }
-
-      return data
     })
   }).prefix('/v1')
 }).prefix('/api')
