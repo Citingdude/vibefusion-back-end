@@ -8,6 +8,7 @@ export default class Pages extends BaseSchema {
       table.increments('id')
       table.text('slug').unique().notNullable
       table.text('title')
+      table.text('image')
       table.json('data')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

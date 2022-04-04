@@ -37,7 +37,13 @@ export default class PageController {
     page.title = body.title
     page.data = body.data
 
+    const image = ctx.request.file('file')
+
+    await image.moveToDisk('./')
+
     await page?.save()
+
+    return ctx.request
   }
 
   public async destroy(ctx: HttpContextContract) {

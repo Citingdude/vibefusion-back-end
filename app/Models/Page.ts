@@ -12,6 +12,9 @@ export default class Page extends BaseModel {
   public title: string
 
   @column()
+  public image: string
+
+  @column()
   public data: object
 
   @column.dateTime({ autoCreate: true })
