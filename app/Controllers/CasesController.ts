@@ -31,12 +31,25 @@ export default class CasesController {
   }
 
   public async update(ctx: HttpContextContract) {
-    const slug = 'test slug'
+    const slug = ctx.params.slug
+    const body = ctx.request.body()
+    const casePage = await Case.findBy('slug', slug)
 
-    const oldCase = await Case.findBy('slug', slug)
+    casePage.slug = body.slug
+    casePage.category = body.category
+    casePage.title = body.title
+    casePage.description = body.description
+    casePage.image = body.image
+    casePage.content = body.content
 
-    oldCase.title = 'Newer title'
+    // if (ctx.request.file('file')) {
+    //   const image = ctx.request.file('file')
 
-    await oldCase.save()
+    //   await image.moveToDisk('./')
+    // }
+
+    await casePage?.save()
+
+    return ctx.request
   }
 }
