@@ -3,16 +3,22 @@ import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
 export default class Case extends BaseModel {
   @column({ isPrimary: true })
-  public id: number
+  public id: Number
 
   @column()
-  public slug: string
+  public slug: String
 
   @column()
-  public title: string
+  public title: String
 
   @column()
-  public description: string
+  public description: String
+
+  @column()
+  public image: String
+
+  @column()
+  public content: JSON
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

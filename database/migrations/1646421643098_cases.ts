@@ -9,6 +9,8 @@ export default class Cases extends BaseSchema {
       table.text('slug').unique().notNullable
       table.text('title')
       table.text('description')
+      table.text('image')
+      table.jsonb('content')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })
