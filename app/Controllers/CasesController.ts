@@ -8,12 +8,11 @@ export default class CasesController {
   },
 
   public async view(ctx: HttpContextContract) {
-    return [
-      {
-        slug: ctx.params
-        context: ctx
-      }
-    ]
+    const slug = ctx.params.slug
+    const casePage = await Case.findBy('slug', slug)
+    const caseJSON = casePage?.serialize()
+
+    return caseJSON
   }
 
   public async create(ctx: HttpContextContract) {
@@ -21,8 +20,11 @@ export default class CasesController {
 
     newCase.slug = ctx.request.body().slug
     newCase.title = ctx.request.body().title
+    newCase.category = ctx.request.body().category
     newCase.description = ctx.request.body().description
-    
+    newCase.image = ctx.request.body().image
+    newCase.content = ctx.request.body().content
+
     await newCase.save()
 
     return ctx.request.body()
