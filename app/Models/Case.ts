@@ -9,6 +9,9 @@ export default class Case extends BaseModel {
   public slug: String
 
   @column()
+  public category: String
+
+  @column()
   public title: String
 
   @column()

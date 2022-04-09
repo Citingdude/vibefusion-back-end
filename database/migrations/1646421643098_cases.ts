@@ -7,6 +7,7 @@ export default class Cases extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.text('slug').unique().notNullable
+      table.text('category')
       table.text('title')
       table.text('description')
       table.text('image')
