@@ -15,7 +15,7 @@ export default class PageController {
 
     page.slug = body.slug
     page.title = body.title
-    page.data = body.data
+    page.content = body.content
 
     await page.save()
   }
@@ -32,14 +32,16 @@ export default class PageController {
     const slug = ctx.params.slug
     const body = ctx.request.body()
     const page = await Page.findBy('slug', slug)
-    
+
     page.slug = body.slug
     page.title = body.title
-    page.data = body.data
+    page.content = body.content
 
-    const image = ctx.request.file('file')
+    if (ctx.request.file('file')) {
+      const image = ctx.request.file('file')
 
-    await image.moveToDisk('./')
+      await image.moveToDisk('./')
+    }
 
     await page?.save()
 
