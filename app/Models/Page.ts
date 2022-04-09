@@ -3,19 +3,19 @@ import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
 export default class Page extends BaseModel {
   @column({ isPrimary: true })
-  public id: number
+  public id: Number
 
   @column()
-  public slug: string
+  public slug: String
 
   @column()
-  public title: string
+  public title: String
 
   @column()
-  public image: string
+  public image: String
 
   @column()
-  public data: object
+  public content: JSON
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
