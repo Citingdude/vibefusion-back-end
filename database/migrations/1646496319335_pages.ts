@@ -9,7 +9,7 @@ export default class Pages extends BaseSchema {
       table.text('slug').unique().notNullable
       table.text('title')
       table.text('image')
-      table.json('data')
+      table.jsonb('content')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })
