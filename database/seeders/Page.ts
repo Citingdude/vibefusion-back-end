@@ -31,6 +31,11 @@ export default class PageSeeder extends BaseSeeder {
             "title": "Samenwerken?",
             "button": "Contacteer ons"
           }
+        },
+        "cta_banner": {
+          "title": "Samenwerken voor jouw volgend project?"
+          "body": "Heb je nood aan een nieuwe website, webshop of branding? We helpen je graag verder met jouw toekomstige projecten!",
+          "button": "Vraag een vrijblijvend gesprek aan"
         }
       }
     })
