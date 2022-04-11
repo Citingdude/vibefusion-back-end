@@ -78,7 +78,7 @@ Route.group(() => {
       return isAuthenticated
     })
 
-    Route.post('/logout', async ({ auth, response }) => {
+    Route.post('/logout', async ({ auth }) => {
       await auth.use('api').revoke()
 
       return {
