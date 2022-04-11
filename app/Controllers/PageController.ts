@@ -2,7 +2,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Page from 'App/Models/Page'
 
 export default class PageController {
-  public async index(ctx: HttpContextContract) {
+  public async index() {
     const pages = await Page.all()
     const pagesJSON = pages.map((page) => page.serialize())
 
@@ -33,14 +33,19 @@ export default class PageController {
     const body = ctx.request.body()
     const page = await Page.findBy('slug', slug)
 
-    page.slug = body.slug
-    page.title = body.title
-    page.content = body.content
+    if (page) {
+      page.slug = body.slug
+      page.title = body.title
+      page.content = body.content
+    }
 
     if (ctx.request.file('file')) {
       const image = ctx.request.file('file')
 
-      await image.moveToDisk('./')
+      if (image) {
+        await image.moveToDisk('./')
+      }
+
     }
 
     await page?.save()
