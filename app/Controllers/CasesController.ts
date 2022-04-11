@@ -1,12 +1,11 @@
-import { DriveFake } from '@adonisjs/core/build/standalone'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Database from '@ioc:Adonis/Lucid/Database'
 import Case from 'App/Models/Case'
 
 export default class CasesController {
-  public async index(ctx: HttpContextContract) {
+  public async index() {
     return Database.from('cases').select('*')
-  },
+  }
 
   public async view(ctx: HttpContextContract) {
     const slug = ctx.params.slug
@@ -36,20 +35,27 @@ export default class CasesController {
     const body = ctx.request.body()
     const casePage = await Case.findBy('slug', slug)
 
-    casePage.slug = body.slug
-    casePage.category = body.category
-    casePage.title = body.title
-    casePage.description = body.description
-    casePage.content = body.content
+    if (casePage) {
+      casePage.slug = body.slug
+      casePage.category = body.category
+      casePage.title = body.title
+      casePage.description = body.description
+      casePage.content = body.content
+    }
 
     // Handle image
     if (ctx.request.file('featured_image')) {
       const image = ctx.request.file('featured_image')
 
       // Save image on local disk
-      await image.moveToDisk('./', 'test', 'local')
+      if (image) {
+        await image.moveToDisk('./')
+      }
 
-      casePage.image = image?.fileName
+      // TODO: Fix casePage.image type
+      // casePage.image = image?.fileName
+
+        
     }
 
     await casePage?.save()
