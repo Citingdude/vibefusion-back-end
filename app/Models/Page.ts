@@ -15,7 +15,7 @@ export default class Page extends BaseModel {
   public image: String
 
   @column()
-  public content: JSON
+  public content: any
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

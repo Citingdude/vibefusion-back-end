@@ -3,7 +3,7 @@ import Page from 'App/Models/Page'
 
 export default class PageSeeder extends BaseSeeder {
   public async run() {
-    await Page.updateOrCreate({
+    await Page.updateOrCreate({}, {
       slug: 'home',
       title: 'Home',
       image: '',
@@ -33,7 +33,7 @@ export default class PageSeeder extends BaseSeeder {
           }
         },
         "cta_banner": {
-          "title": "Samenwerken voor jouw volgend project?"
+          "title": "Samenwerken voor jouw volgend project?",
           "body": "Heb je nood aan een nieuwe website, webshop of branding? We helpen je graag verder met jouw toekomstige projecten!",
           "button": "Vraag een vrijblijvend gesprek aan"
         }
