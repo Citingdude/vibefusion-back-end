@@ -1,3 +1,4 @@
+import { DriveFake } from '@adonisjs/core/build/standalone'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Database from '@ioc:Adonis/Lucid/Database'
 import Case from 'App/Models/Case'
@@ -39,17 +40,20 @@ export default class CasesController {
     casePage.category = body.category
     casePage.title = body.title
     casePage.description = body.description
-    casePage.image = body.image
     casePage.content = body.content
 
-    // if (ctx.request.file('file')) {
-    //   const image = ctx.request.file('file')
+    // Handle image
+    if (ctx.request.file('featured_image')) {
+      const image = ctx.request.file('featured_image')
 
-    //   await image.moveToDisk('./')
-    // }
+      // Save image on local disk
+      await image.moveToDisk('./', 'test', 'local')
+
+      casePage.image = image?.fileName
+    }
 
     await casePage?.save()
 
-    return ctx.request
+    return ctx.request.file('featured_image')
   }
 }
