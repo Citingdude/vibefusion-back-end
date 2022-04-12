@@ -36,7 +36,7 @@ const redisConfig: RedisConfig = {
     |
     */
     local: {
-      url: Env.get('REDIS_URL')
+      url: Env.get('REDIS_URL'),
       // host: Env.get('REDIS_HOST'),
       // port: Env.get('REDIS_PORT'),
       // password: Env.get('REDIS_PASSWORD', ''),
