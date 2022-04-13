@@ -35,32 +35,25 @@ export default class CasesController {
     const body = ctx.request.body()
     const casePage = await Case.findBy('slug', slug)
 
+    const image = ctx.request.file('featured_image')
+
+    // Handle image
+    if (image) {
+      // Save image on local disk
+      await image.moveToDisk('./')
+    }
+
     if (casePage) {
       casePage.slug = body.slug
       casePage.category = body.category
       casePage.title = body.title
       casePage.description = body.description
       casePage.content = body.content
-    }
-
-    // Handle image
-    if (ctx.request.file('featured_image')) {
-      const image = ctx.request.file('featured_image')
-
-      // Save image on local disk
-      if (image) {
-        await image.moveToDisk('./')
-      }
-
-      if (casePage) {
-        casePage.image = image?.fileName
-      }
-
-
+      casePage.image = image?.fileName
     }
 
     await casePage?.save()
 
-    return ctx.request.file('featured_image')
+    return 'test'
   }
 }
