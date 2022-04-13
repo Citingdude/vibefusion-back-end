@@ -18,7 +18,7 @@ export default class Case extends BaseModel {
   public description: String
 
   @column()
-  public image: String
+  public image: String | undefined
 
   @column()
   public content: JSON

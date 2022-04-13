@@ -52,10 +52,11 @@ export default class CasesController {
         await image.moveToDisk('./')
       }
 
-      // TODO: Fix casePage.image type
-      // casePage.image = image?.fileName
+      if (casePage) {
+        casePage.image = image?.fileName
+      }
 
-        
+
     }
 
     await casePage?.save()
