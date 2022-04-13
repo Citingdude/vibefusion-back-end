@@ -53,7 +53,5 @@ export default class CasesController {
     }
 
     await casePage?.save()
-
-    return 'test'
   }
 }
