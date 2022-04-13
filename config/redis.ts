@@ -41,11 +41,18 @@ const redisConfig: RedisConfig = {
       password: Env.get('REDIS_PASSWORD', ''),
       db: 0,
       keyPrefix: '',
-      tls: {
-        rejectUnauthorized: false,
-      },
+      // tls: {
+      //   rejectUnauthorized: false,
+      // },
     },
   },
+}
+
+// Add tls config if REDIS_TLS is required. Heroku production requires this.
+if (Env.get('REDIS_TLS') === 'true') {
+  redisConfig.connections.local.tls = {
+    rejectUnauthorized: false,
+  }
 }
 
 export default redisConfig
